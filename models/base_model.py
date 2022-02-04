@@ -1,9 +1,29 @@
 #!/usr/bin/env python3
-""" Base Model """
+from datetime import datetime
+from uuid import uuid4
+import models
+
 
 class BaseModel:
-    """ Base class all other classes will inherit from """
+    """ BaseModel for AirBnB project """
+    id = ""
+    created_at = datetime.utcnow()
+    updated_at = datetime.utcnow()
 
     def __init__(self, *args, **kwargs):
-        """ Initialize the base model """
+        """ Constructor """
+        pass
+
+    def __str__(self):
+        """ Return a string representation of the instance """
+        pass
+
+    def save(self):
+        """ Update the public instance attribute updated_at with current
+        datetime """
+        pass
+
+    def to_dict(self):
+        """ Return a dictionary containing all keys/values of __dict__ of the
+        """
         pass
