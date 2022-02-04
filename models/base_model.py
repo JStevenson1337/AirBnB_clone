@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from datetime import datetime
 from uuid import uuid4
-import models
 
 
 class BaseModel:
@@ -12,7 +11,10 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """ Constructor """
-        pass
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "created_at":
+                    self.created_at = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
 
     def __str__(self):
         """ Return a string representation of the instance """
