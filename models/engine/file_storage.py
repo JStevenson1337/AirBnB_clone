@@ -19,6 +19,18 @@ class FileStorage:
         """
         return FileStorage.__objects
 
+    def reload(self):
+        """
+        reload method
+        """
+        try:
+            with open(FileStorage.__file_path, 'r') as f:
+                FileStorage.__objects = json.load(f)
+                for key, value in FileStorage.__objects.items():
+                    FileStorage.__objects[key] = eval(value['__class__'])(**value)
+        except FileNotFoundError:
+            pass
+
     def new(self, obj):
         """
         new method
@@ -29,24 +41,12 @@ class FileStorage:
         """
         save method
         """
-        my_dict = {}
-        for key, value in FileStorage.__objects.items():
-            my_dict[key] = value.to_dict()
+        my_dict = {
+            key: value.to_dict() for key, value in FileStorage.__objects.items()
+        }
+
         with open(FileStorage.__file_path, 'w') as f:
             json.dump(my_dict, f)
-
-    def reload(self):
-        """
-        reload method
-        """
-        try:
-            with open(FileStorage.__file_path, 'r') as f:
-                my_dict = json.load(f)
-            for key, value in my_dict.items():
-                value = value['__class__'](**value)
-                FileStorage.__objects[key] = value
-        except FileNotFoundError:
-            pass
 
     def delete(self, obj=None):
         """
