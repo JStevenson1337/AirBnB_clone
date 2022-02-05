@@ -27,7 +27,8 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 FileStorage.__objects = json.load(f)
                 for key, value in FileStorage.__objects.items():
-                    FileStorage.__objects[key] = eval(value['__class__'])(**value)
+                    FileStorage.__objects[key] = eval(
+                        value['__class__'])(**value)
         except FileNotFoundError:
             pass
 
@@ -42,7 +43,8 @@ class FileStorage:
         save method
         """
         my_dict = {
-            key: value.to_dict() for key, value in FileStorage.__objects.items()
+            key: value.to_dict()
+            for key, value in FileStorage.__objects.items()
         }
 
         with open(FileStorage.__file_path, 'w') as f:
