@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import cmd
 import os
+import sys
 
 
 class HBNBCommand(cmd.Cmd):
@@ -10,12 +11,16 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     counter = 0
 
-    def execute_quit(self, args):
-        """Quit command to exit the program"""
+    def do_quit(self, *args):
+        """Type quit to quit the program"""
         return True
 
-    def execute_EOF(self, args):
-        """Quit command to exit the program at the end of the file"""
+    def do_exit(self, *args):
+        """Type exit to quit the program"""
+        return True
+
+    def do_EOF(self, *args):
+        """Quit program with ctrl + D"""
         return True
 
     def emptyline(self):
