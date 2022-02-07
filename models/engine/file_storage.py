@@ -11,7 +11,7 @@ from models.review import Review
 from models.state import State
 
 
-class FileStorage(object):
+class FileStorage:
     """
     FileStorage class
     """
