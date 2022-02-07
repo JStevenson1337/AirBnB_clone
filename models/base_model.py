@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Base Model """
 from datetime import datetime
 from uuid import uuid4
 import models
@@ -42,23 +43,3 @@ class BaseModel:
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
         return new_dict
-
-    def delete(self):
-        """ Delete the current instance from the storage """
-        models.storage.delete(self)
-
-    def reload(self):
-        """ Reload the instance from the storage """
-        models.storage.reload(self)
-
-    def __eq__(self, other):
-        """ Return True if self and other have the same id """
-        return self.id == other.id
-
-    def __lt__(self, other):
-        """ Return True if self's id is alphabetically less than other's id """
-        return self.id < other.id
-
-    def __gt__(self, other):
-        """ Return True if self's id is alphabetically greater than other's id """
-        return self.id > other.id
