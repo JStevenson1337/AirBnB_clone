@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ File storage engine for the API """
 # -*- coding: utf-8 -*-
 import json

@@ -11,6 +11,7 @@ from models.review import Review
 from models.engine import file_storage
 import models
 import os
+from os.path import dirname, abspath
 
 
 class HBNBCommand(cmd.Cmd):
@@ -68,9 +69,20 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            print([str(value) for key, value in
-                   FileStorage.all().items() if
-                   key.split('.')[0] == args[0]])
+            print([v for k, v in FileStorage.all().items()
+                   if args[0] in k])
+
+    def do_count(self, *args):
+        """
+        Counts the number of instances of a class
+        """
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            print(len([v for k, v in FileStorage.all().items()
+                       if args[0] in k]))
 
     def do_show(self, *args):
         """ Prints string representation of an instance """
