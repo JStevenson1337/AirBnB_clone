@@ -2,8 +2,6 @@
 """ File storage engine for the API """
 # -*- coding: utf-8 -*-
 import json
-import os
-from models.base_model import BaseModel
 
 
 class FileStorage:

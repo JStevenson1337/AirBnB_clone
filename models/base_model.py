@@ -6,10 +6,6 @@ import models
 
 class BaseModel:
     """ BaseModel for AirBnB project """
-    # id = ""
-    # created_at = datetime.utcnow()
-    # updated_at = datetime.utcnow()
-
     def __init__(self, *args, **kwargs):
         """ Constructor """
         if kwargs:
@@ -46,3 +42,23 @@ class BaseModel:
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
         return new_dict
+
+    def delete(self):
+        """ Delete the current instance from the storage """
+        models.storage.delete(self)
+
+    def reload(self):
+        """ Reload the instance from the storage """
+        models.storage.reload(self)
+
+    def __eq__(self, other):
+        """ Return True if self and other have the same id """
+        return self.id == other.id
+
+    def __lt__(self, other):
+        """ Return True if self's id is alphabetically less than other's id """
+        return self.id < other.id
+
+    def __gt__(self, other):
+        """ Return True if self's id is alphabetically greater than other's id """
+        return self.id > other.id
