@@ -2,6 +2,18 @@
 import cmd
 import os
 import sys
+import models
+from models.engine.file_storage import FileStorage
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
+           'City': City, 'Amenity': Amenity, 'Place': Place,
+           'Review': Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -9,7 +21,6 @@ class HBNBCommand(cmd.Cmd):
     Class HBNBCommand that inherits from cmd.Cmd
     """
     prompt = '(hbnb) '
-    counter = 0
 
     def do_quit(self, *args):
         """Type quit to quit the program"""
@@ -26,6 +37,26 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing on empty input line"""
         pass
+
+    def do_create(self, args):
+        """
+        Type 'create' and a class name to create a new instance
+        of that class
+        """
+        if not args:
+            print('** class name missing **')
+        elif args in classes.keys():
+            new_inst = classes[args]()
+            new_inst.save()
+            print(new_inst.id)
+        else:
+            print("** class doesn't exist **")
+
+    def do_show(self, *args):
+        """
+        Prints the string representation of an instance based
+        on the class name and id
+        """
 
 
 if __name__ == '__main__':
