@@ -22,19 +22,22 @@ class FileStorage:
         """
         all method
         """
-        return FileStorage.__objects
+        return self.__objects
 
     def reload(self):
         """
         reload method
         """
+        print("RELOADING")
         try:
             with open(FileStorage.__file_path, encoding="utf-8") as f:
-                FileStorage.__objects = json.load(f)
+                self.__objects = json.load(f)
+                print(self.__objects)
+
                 for key, value in FileStorage.__objects.items():
-                    FileStorage.__objects[key] = eval(value.__class__.__name__
-                                                      + "(**" +
-                                                      str(value) + ")")
+                    self.__objects[key] = eval(
+                        value.__class__.__name__ + "(**" + str(value) + ")"
+                    )
         except FileNotFoundError:
             pass
 
@@ -43,7 +46,7 @@ class FileStorage:
         new method
         """
         if obj:
-            FileStorage.__objects[obj.id] = obj
+            FileStorage.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
     def save(self):
         """

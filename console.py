@@ -8,10 +8,11 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-from models.engine import file_storage
+from models import storage
 import models
 import os
 from os.path import dirname, abspath
+import errno
 
 
 class HBNBCommand(cmd.Cmd):
@@ -64,12 +65,12 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all instances
         based or not on the class name
         """
-        if len(args) == 0:
-            print(FileStorage.all())
-        elif args[0] not in HBNBCommand.__classes:
+        if args[0] == '':
+            print(storage.all())
+        elif args and args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            print([v for k, v in FileStorage.all().items()
+            print([str(v) for k, v in storage.all().items()
                    if args[0] in k])
 
     def do_count(self, *args):
@@ -140,7 +141,23 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing on empty input line"""
         pass
 
+    # def try_fs(self, *args):
+    #     try:
+    #         with open(*args[1]) as f:
+    #             s = f.read()
+    #             print
+    #             'read', len(s), 'bytes.'
+    #     except IOError as x:
+    #         if x.errno == errno.ENOENT:
+    #             print
+    #             *args[1], '- does not exist'
+    #         elif x.errno == errno.EACCES:
+    #             print
+    #             *args[1], '- cannot be read'
+    #         else:
+    #             print
+    #             *args[1], '- some other error'
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-    # HBNBCommand().onecmd("create BaseModel")
