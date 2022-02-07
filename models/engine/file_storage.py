@@ -11,11 +11,11 @@ from models.review import Review
 from models.state import State
 
 
-class FileStorage():
+class FileStorage(object):
     """
     FileStorage class
     """
-    __file_path = 'file.json'
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
@@ -29,11 +29,12 @@ class FileStorage():
         reload method
         """
         try:
-            with open(FileStorage.__file_path, 'r') as f:
+            with open(FileStorage.__file_path, encoding="utf-8") as f:
                 FileStorage.__objects = json.load(f)
                 for key, value in FileStorage.__objects.items():
-                    FileStorage.__objects[key] = eval(
-                        value['__class__'])(**value)
+                    FileStorage.__objects[key] = eval(value.__class__.__name__
+                                                      + "(**" +
+                                                      str(value) + ")")
         except FileNotFoundError:
             pass
 
@@ -41,19 +42,18 @@ class FileStorage():
         """
         new method
         """
-        FileStorage.__objects[obj.id] = obj
+        if obj:
+            FileStorage.__objects[obj.id] = obj
 
     def save(self):
         """
         save method
         """
-        my_dict = {
-            key: value.to_dict()
-            for key, value in FileStorage.__objects.items()
-        }
-
-        with open(FileStorage.__file_path, 'w') as f:
-            json.dump(my_dict, f)
+        try:
+            with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
+                json.dump(FileStorage.__objects, f)
+        except FileNotFoundError:
+            pass
 
     def delete(self, obj=None):
         """
@@ -62,7 +62,7 @@ class FileStorage():
         if obj:
             del FileStorage.__objects[obj.id]
         else:
-            FileStorage.__objects.clear()
+            FileStorage.__objects = {}
 
     def close(self):
         """

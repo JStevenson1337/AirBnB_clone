@@ -4,6 +4,8 @@ This module is the unittest file for the class: BaseModel.
 """
 from genericpath import exists
 import unittest
+
+import models
 from models.base_model import BaseModel
 # import pep8
 
