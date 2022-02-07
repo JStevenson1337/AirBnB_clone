@@ -2,6 +2,7 @@
 import cmd
 import os
 import sys
+import models
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -46,10 +47,16 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
         elif args in classes.keys():
             new_inst = classes[args]()
-            FileStorage.save(new_inst)
+            new_inst.save()
             print(new_inst.id)
         else:
             print("** class doesn't exist **")
+
+    def do_show(self, *args):
+        """
+        Prints the string representation of an instance based
+        on the class name and id
+        """
 
 
 if __name__ == '__main__':
