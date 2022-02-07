@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import cmd
-import os
-from models.engine.file_storage import FileStorage
+from typing import Dict, Union, Type
+
+from models import FileStorage
+from models.engine import file_storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -10,9 +12,10 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
-classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
-           'City': City, 'Amenity': Amenity, 'Place': Place,
-           'Review': Review}
+
+classes: Dict[str, Type[Union[Amenity, User, BaseModel, State, City, Review, Place]]] = \
+    {'BaseModel': BaseModel, 'User': User, 'State': State,
+     'City': City, 'Amenity': Amenity, 'Place': Place, 'Review': Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -37,7 +40,8 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing on empty input line"""
         pass
 
-    def do_create(self, args):
+    @staticmethod
+    def do_create(args):
         """
         Type 'create' and a class name to create a new instance
         of that class
@@ -132,3 +136,4 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+    # HBNBCommand().onecmd("create BaseModel")
