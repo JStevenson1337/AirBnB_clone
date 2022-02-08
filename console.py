@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ Console for the application. """
-from __future__ import annotations
 import cmd
 from models import FileStorage
 import models
