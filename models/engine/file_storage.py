@@ -10,6 +10,8 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 import models
+classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
+           'City': City, 'Amenity': Amenity, 'Place': Place, 'Review': Review}
 
 
 class FileStorage:
@@ -34,7 +36,7 @@ class FileStorage:
                 all_json = json.load(f)
                 for key in all_json:
                     self.__objects[key] = getattr(
-                        models, all_json[key]['__class__'])(**all_json[key])
+                        classes, all_json[key]['__class__'])(**all_json[key])
         except FileNotFoundError:
             pass
 

@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.__classes:
+        elif args[0] not in classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print('** instance id missing **')
@@ -67,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(args) == 0:
             print(FileStorage.all())
-        elif args[0] not in HBNBCommand.__classes:
+        elif args[0] not in classes:
             print("** class doesn't exist **")
         else:
             print([v for k, v in FileStorage.all().items()
@@ -79,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.__classes:
+        elif args[0] not in classes:
             print("** class doesn't exist **")
         else:
             print(len([v for k, v in FileStorage.all().items()
@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         """ Prints string representation of an instance """
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.__classes:
+        elif args[0] not in classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print('** instance id missing **')
@@ -106,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.__classes:
+        elif args[0] not in classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print('** instance id missing **')
