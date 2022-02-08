@@ -8,7 +8,7 @@ import models
 class BaseModel:
     """ BaseModel for AirBnB project """
     def __init__(self, *args, **kwargs):
-        """ Constructor """
+        """ Initialize the instance """
         if kwargs:
             for key in kwargs:
                 if key in ('created_at', 'updated_at'):

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Console for the application. """
 import cmd
 from models import FileStorage
 from models.base_model import BaseModel
@@ -19,6 +20,7 @@ class HBNBCommand(cmd.Cmd):
     """
     Class HBNBCommand that inherits from cmd.Cmd
     """
+
     prompt = '(hbnb) '
 
     def do_create(self, args):
@@ -48,6 +50,7 @@ class HBNBCommand(cmd.Cmd):
             print('** attribute name missing **')
         elif len(args) < 4:
             print('** value missing **')
+
         else:
             key = args[0] + '.' + args[1]
             if key in FileStorage.all().keys():
@@ -70,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in classes:
             print("** class doesn't exist **")
         else:
-            print([v for k, v in FileStorage.all().items()
+            print([str(v) for k, v in models.storage.all().items()
                    if args[0] in k])
 
     def do_count(self, *args):
@@ -126,15 +129,19 @@ class HBNBCommand(cmd.Cmd):
         print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, *args):
-        """Type quit to quit the program"""
+        """Quits the program"""
         return True
 
     def do_exit(self, *args):
-        """Type exit to quit the program"""
+        """
+        Exits the program
+        """
         return True
 
     def do_EOF(self, *args):
-        """Quit program with ctrl + D"""
+        """
+        Exits the program
+        """
         return True
 
     def emptyline(self):
