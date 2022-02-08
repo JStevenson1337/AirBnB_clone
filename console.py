@@ -126,20 +126,22 @@ class HBNBCommand(cmd.Cmd):
         print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, *args):
-        """Type quit to quit the program"""
+        """
+        Exits the program
+        """
         return True
 
     def do_exit(self, *args):
-        """Type exit to quit the program"""
+        """
+        Exits the program
+        """
         return True
 
     def do_EOF(self, *args):
-        """Quit program with ctrl + D"""
+        """
+        Exits the program
+        """
         return True
-
-    def emptyline(self):
-        """Do nothing on empty input line"""
-        pass
 
     # def try_fs(self, *args):
     #     try:
