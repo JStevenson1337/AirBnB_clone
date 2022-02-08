@@ -1,40 +1,40 @@
-#!/usr/bin/env python3
-""" Base Model """
+#!/usr/bin/python3
+""" Base Model class """
+import uuid
 from datetime import datetime
-from uuid import uuid4
-import models
+from models import storage
 
 
 class BaseModel:
-    """ BaseModel for AirBnB project """
+    """ BaseModel class """
     def __init__(self, *args, **kwargs):
-        """ Initialize the instance """
+        """initializes new instance of BaseModel"""
         if kwargs:
             for key, value in kwargs.items():
-                if key != "__class__":
+                if key != '__class__':
                     setattr(self, key, value)
+            self.created_at = datetime.fromisoformat(kwargs['created_at'])
+            self.updated_at = datetime.fromisoformat(kwargs['updated_at'])
         else:
-            self.id = str(uuid4())
+            self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self)
+            storage.new(self)
 
     def __str__(self):
-        """ Return a string representation of the instance """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
-                                     self.__dict__)
+        """ returns a string containing all keys/values of __dict__"""
+        return '[{}] ({}) {}'.format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
-        """ Update the public instance attribute updated_at with current
-        datetime """
+        """updates the public instance attribute updated_at to current time"""
         self.updated_at = datetime.now()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
-        """ Return a dictionary containing all keys/values of __dict__ of the
-        """
-        new_dict = self.__dict__.copy()
-        new_dict["__class__"] = self.__class__.__name__
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
-        return new_dict
+        """ returns a dictionary containing all keys/values of __dict__"""
+        my_dict = vars(self).copy()
+        my_dict['__class__'] = self.__class__.__name__
+        my_dict['updated_at'] = self.updated_at.isoformat()
+        my_dict['created_at'] = self.created_at.isoformat()
+        return my_dict
