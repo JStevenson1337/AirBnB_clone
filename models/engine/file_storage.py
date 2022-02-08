@@ -28,7 +28,6 @@ class FileStorage:
         """
         reload method
         """
-        print("RELOADING")
         try:
             with open(FileStorage.__file_path, encoding="utf-8") as f:
                 self.__objects = json.load(f)
