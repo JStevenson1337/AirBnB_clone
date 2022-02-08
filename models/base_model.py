@@ -23,8 +23,8 @@ class BaseModel:
 
     def __str__(self):
         """ returns a string containing all keys/values of __dict__"""
-        return '[{}] ({}) {}'.format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        return '[{}] ({}) {}'.format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """updates the public instance attribute updated_at to current time"""
