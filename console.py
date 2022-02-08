@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """ Console for the application. """
 import cmd
+
+import models
 from models import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -13,7 +15,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd): 
     """
-    Class HBNBCommand that inherits from cmd.Cmd
+    Class that contains the console for the application.
     """
 
     prompt = '(hbnb) '
@@ -60,10 +62,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, *args):
-        """
-        Prints all string representation of all instances
-        based or not on the class name
-        """
+        """ Prints all instances """
         if args[0] == '':
             print(models.storage.all())
         elif args and args[0] not in HBNBCommand.__classes:
@@ -73,9 +72,7 @@ class HBNBCommand(cmd.Cmd):
                    if args[0] in k])
 
     def do_count(self, *args):
-        """
-        Counts the number of instances of a class
-        """
+        """ Counts the number of instances of a class """
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__classes:
@@ -85,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
                        if args[0] in k]))
 
     def do_show(self, *args):
-        """ Prints string representation of an instance """
+        """ Prints an instance """
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__classes:
@@ -100,9 +97,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, *args):
-        """
-        Deletes an instance based on the class name and id
-        """
+        """ Deletes an instance """
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__classes:
@@ -119,29 +114,24 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """
-        Default method that prints an error message
-        if the command is not recognized
+        Default method for the console.
         """
         print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, *args):
-        """Quits the program"""
+        """ Quits the application"""
         return True
 
     def do_exit(self, *args):
-        """
-        Exits the program
-        """
+        """ Quits the application"""
         return True
 
     def do_EOF(self, *args):
-        """
-        Exits the program
-        """
+        """ Quits the application with an end of file"""
         return True
 
     def emptyline(self):
-        """Do nothing on empty input line"""
+        """ empty line"""
         pass
 
 
