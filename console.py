@@ -2,7 +2,13 @@
 """ Console for the application. """
 import cmd
 from models import FileStorage
-import models
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd): 
@@ -11,8 +17,9 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = '(hbnb) '
-    __classes = ["BaseModel", "User", "State", "City", "Amenity", "Place",
-                 "Review"]
+    __classes = {'BaseModel': BaseModel, 'User': User,
+                 'State': State, 'City': City, 'Amenity': Amenity,
+                 'Place': Place, 'Review': Review}
 
     def do_create(self, *args):
         """
@@ -136,13 +143,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing on empty input line"""
         pass
-
-    def do_BaseModel(self, *args):
-        """
-        Prints string representation of all instances
-        based or not on the class name
-        """
-        print(models.storage.all())
 
 
 if __name__ == '__main__':

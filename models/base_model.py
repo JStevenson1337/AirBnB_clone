@@ -8,16 +8,11 @@ import models
 class BaseModel:
     """ BaseModel for AirBnB project """
     def __init__(self, *args, **kwargs):
-        """ Constructor """
+        """ Initialize the instance """
         if kwargs:
-            self.__dict__ = kwargs
             for key, value in kwargs.items():
-                if key == "created_at":
-                    self.created_at = datetime.strptime(value,
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
-                if key == "updated_at":
-                    self.updated_at = datetime.strptime(value,
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                if key != "__class__":
+                    setattr(self, key, value)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
