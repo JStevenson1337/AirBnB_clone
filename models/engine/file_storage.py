@@ -9,6 +9,7 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
+import models
 
 
 class FileStorage:
@@ -22,18 +23,18 @@ class FileStorage:
         """
         all method
         """
-        return FileStorage.__objects
+        return self.__objects
 
     def reload(self):
         """
         reload method
         """
         try:
-            with open(FileStorage.__file_path, encoding="utf-8") as f:
-                FileStorage.__objects = json.load(f)
-                for key, value in FileStorage.__objects.items():
-                    FileStorage.__objects[key] = eval(
-                        value.__class__.__name__ + "(**" + str(value) + ")")
+            with open(self.__file_path, 'r', encoding="utf-8") as f:
+                all_json = json.load(f)
+                for key in all_json:
+                    self.__objects[key] = getattr(
+                        models, all_json[key]['__class__'])(**all_json[key])
         except FileNotFoundError:
             pass
 
@@ -41,16 +42,20 @@ class FileStorage:
         """
         new method
         """
-        if obj:
-            FileStorage.__objects[obj.id] = obj
+        name = obj.__class__.__name__
+        key = name + '.' + obj.id
+        self.__objects[key] = obj
 
     def save(self):
         """
         save method
         """
+        json_dict = {}
         try:
-            with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
-                json.dump(FileStorage.__objects, f)
+            with open(self.__file_path, 'w', encoding="utf-8") as f:
+                for k, v in self.__objects.items():
+                    json_dict[k] = v.to_dict()
+                json.dump(json_dict, f)
         except FileNotFoundError:
             pass
 

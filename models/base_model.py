@@ -10,14 +10,12 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """ Constructor """
         if kwargs:
-            self.__dict__ = kwargs
-            for key, value in kwargs.items():
-                if key == "created_at":
-                    self.created_at = datetime.strptime(value,
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
-                if key == "updated_at":
-                    self.updated_at = datetime.strptime(value,
-                                                        "%Y-%m-%dT%H:%M:%S.%f")
+            for key in kwargs:
+                if key in ('created_at', 'updated_at'):
+                    kwargs[key] = datetime.strptime(
+                        kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
+                if key != ('__class__'):
+                    setattr(self, key, kwargs[key])
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -33,6 +31,7 @@ class BaseModel:
         """ Update the public instance attribute updated_at with current
         datetime """
         self.updated_at = datetime.now()
+        models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):

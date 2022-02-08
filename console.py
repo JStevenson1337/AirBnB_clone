@@ -11,7 +11,8 @@ from models.review import Review
 from models.engine import file_storage
 import models
 import os
-from os.path import dirname, abspath
+classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
+           'City': City, 'Amenity': Amenity, 'Place': Place, 'Review': Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,19 +20,19 @@ class HBNBCommand(cmd.Cmd):
     Class HBNBCommand that inherits from cmd.Cmd
     """
     prompt = '(hbnb) '
-    __classes = ["BaseModel", "User", "State", "City", "Amenity", "Place",
-                 "Review"]
 
-    def do_create(self, *args):
+    def do_create(self, args):
         """
         Creates an instance of a class
         """
-        if len(args) == 0:
-            print("** class name missing **")
-        elif args[0] not in HBNBCommand.__classes:
-            print("** class doesn't exist **")
+        if len(args) < 1:
+            print('** class name missing **')
+        elif args in classes.keys():
+            new_inst = classes[args]()
+            new_inst.save()
+            print(new_inst.id)
         else:
-            print(args[0] + "." + str(eval(args[0] + "()")))
+            print("** class doesn't exist **")
 
     def do_update(self, *args):
         """
