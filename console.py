@@ -1,24 +1,16 @@
 #!/usr/bin/env python3
+""" Console for the application. """
+from __future__ import annotations
 import cmd
 from models import FileStorage
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models import storage
 import models
-import os
-from os.path import dirname, abspath
-import errno
 
 
-class HBNBCommand(cmd.Cmd):
+class HBNBCommand(cmd.Cmd): 
     """
     Class HBNBCommand that inherits from cmd.Cmd
     """
+
     prompt = '(hbnb) '
     __classes = ["BaseModel", "User", "State", "City", "Amenity", "Place",
                  "Review"]
@@ -48,6 +40,7 @@ class HBNBCommand(cmd.Cmd):
             print('** attribute name missing **')
         elif len(args) < 4:
             print('** value missing **')
+
         else:
             key = args[0] + '.' + args[1]
             if key in FileStorage.all().keys():
@@ -66,11 +59,11 @@ class HBNBCommand(cmd.Cmd):
         based or not on the class name
         """
         if args[0] == '':
-            print(storage.all())
+            print(models.storage.all())
         elif args and args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            print([str(v) for k, v in storage.all().items()
+            print([str(v) for k, v in models.storage.all().items()
                    if args[0] in k])
 
     def do_count(self, *args):
@@ -126,37 +119,31 @@ class HBNBCommand(cmd.Cmd):
         print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, *args):
-        """Type quit to quit the program"""
+        """Quits the program"""
         return True
 
     def do_exit(self, *args):
-        """Type exit to quit the program"""
+        """
+        Exits the program
+        """
         return True
 
     def do_EOF(self, *args):
-        """Quit program with ctrl + D"""
+        """
+        Exits the program
+        """
         return True
 
     def emptyline(self):
         """Do nothing on empty input line"""
         pass
 
-    # def try_fs(self, *args):
-    #     try:
-    #         with open(*args[1]) as f:
-    #             s = f.read()
-    #             print
-    #             'read', len(s), 'bytes.'
-    #     except IOError as x:
-    #         if x.errno == errno.ENOENT:
-    #             print
-    #             *args[1], '- does not exist'
-    #         elif x.errno == errno.EACCES:
-    #             print
-    #             *args[1], '- cannot be read'
-    #         else:
-    #             print
-    #             *args[1], '- some other error'
+    def do_BaseModel(self, *args):
+        """
+        Prints string representation of all instances
+        based or not on the class name
+        """
+        print(models.storage.all())
 
 
 if __name__ == '__main__':
