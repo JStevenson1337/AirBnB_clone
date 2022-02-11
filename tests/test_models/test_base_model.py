@@ -4,10 +4,8 @@ This module is the unittest file for the class: BaseModel.
 """
 from genericpath import exists
 import unittest
-
-import models
 from models.base_model import BaseModel
-# import pep8
+import pep8
 
 
 class TestBaseClass(unittest.TestCase):
@@ -28,14 +26,14 @@ class TestBaseClass(unittest.TestCase):
         del self.User1
         del self.User2
 
-#    def test_pep8(self):
-#        """
-#        Testing pep8 compliance.
-#        """
-#        pep8style = pep8.StyleGuide(quiet=True)
-#        result = pep8style.check_files(['models/base_model.py'])
-#        self.assertEqual(result.total_errors, 0,
-#                         "Found code style errors (and warnings).")
+    def test_pep8(self):
+        """
+        Testing pep8 compliance.
+        """
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/base_model.py'])
+        self.assertEqual(
+            result.total_errors, 0, "Found code style errors (and warnings).")
 
     def test_documentation(self):
         """
@@ -83,10 +81,10 @@ class TestBaseClass(unittest.TestCase):
         """
         User1_dict = self.User1.to_dict()
         self.assertEqual(User1_dict['__class__'], 'BaseModel')
-        self.assertEqual(User1_dict['created_at'],
-                         self.User1.created_at.isoformat())
-        self.assertEqual(User1_dict['updated_at'],
-                         self.User1.updated_at.isoformat())
+        self.assertEqual(
+            User1_dict['created_at'], self.User1.created_at.isoformat())
+        self.assertEqual(
+            User1_dict['updated_at'], self.User1.updated_at.isoformat())
         self.assertEqual(User1_dict['id'], self.User1.id)
 
 

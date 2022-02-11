@@ -13,7 +13,7 @@ from models.place import Place
 from models.review import Review
 
 
-class HBNBCommand(cmd.Cmd): 
+class HBNBCommand(cmd.Cmd):
     """
     Class that contains the console for the application.
     """
