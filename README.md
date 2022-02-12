@@ -72,13 +72,17 @@ $
     (hbnb) create
     ** class doesn't exist **
     (hbnb) create BaseModel
-    BaseModel.[BaseModel] (6b028b85-0cf8-481b-a91f-63aa7f6eed58) {'id': '6b028b85-0cf8-481b-a91f-63aa7f6eed58', 'created_at': datetime.datetime(2022, 2, 11, 23, 4, 20, 528736), 'updated_at': datetime.datetime(2022, 2, 11, 23, 4, 20, 528739)}
+    BaseModel.[BaseModel] (6b028b85-0cf8-481b-a91f-63aa7f6eed58) {'id':
+    '6b028b85-0cf8-481b-a91f-63aa7f6eed58', 'created_at': datetime.datetime
+    (2022, 2, 11, 23, 4, 20, 528736), 'updated_at': datetime.datetime
+    (2022, 2, 11, 23, 4, 20, 528739)}
     (hbnb) 
 ```
 
 ```
     (hbnb) all
-    {...'BaseModel.6b028b85-0cf8-481b-a91f-63aa7f6eed58': <models.base_model.BaseModel object at 0x7f72ca231e20>}
+    {...'BaseModel.6b028b85-0cf8-481b-a91f-63aa7f6eed58': <models.
+    base_model.BaseModel object at 0x7f72ca231e20>}
     (hbnb)
 ```
 
