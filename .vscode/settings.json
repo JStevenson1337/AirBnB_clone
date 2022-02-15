@@ -1,0 +1,4 @@
+{
+    "remote.SSH.enableAzureIntegration": true,
+    "remote.SSH.remoteServerListenOnSocket": true
+}
