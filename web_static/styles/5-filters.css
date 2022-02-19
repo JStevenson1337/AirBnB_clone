@@ -1,5 +1,5 @@
 .filters {
-    color: #FFF;
+    background-color: #FFF;
     height: 70px;
     width: 100%;
     border: 1px solid #DDD;
@@ -27,15 +27,15 @@ button:hover {
     height: 100%;
     width: 25%;
     border-right: 1px solid #DDD;
+    float: left;
     margin-left: 45px;
-    display: inline-block;
 }
 
 .amenities {
     height: 100%;
     width: 25%;
+    float: left;
     margin-left: 45px;
-    display: inline-block;
 }
 
 h3 {
