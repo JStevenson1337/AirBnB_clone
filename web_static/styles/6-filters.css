@@ -62,17 +62,19 @@ h4 {
     background-color: #FAFAFA;
     border: 1px solid #DDD;
     border-radius: 4px;
-    width: 252px;
-    margin-left: -45px;
-    margin-top: -3px;
+    width: 255px;
+    margin-left: -46px;
+    margin-top: -8px;
 }
 
 .locations:hover .popover {
     display: block;
+    border-top: none;
 }
 
 .amenities:hover .popover {
     display: block;
+    border-top: none;
 }
 
 li {
